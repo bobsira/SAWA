@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "29867047695",
+    "firebase_url": "https://sawa-fdb6d.firebaseio.com",
+    "project_id": "sawa-fdb6d",
+    "storage_bucket": "sawa-fdb6d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29867047695:android:b5be4f2f158b1610",
+        "android_client_info": {
+          "package_name": "com.mtusawa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29867047695-h59q9sdjd7b8tvik95p70ar9adc2oisr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mtusawa",
+            "certificate_hash": "ff6c3c40491ae4d512423312d10b60982606696e"
+          }
+        },
+        {
+          "client_id": "29867047695-jfonniicurj0nt7ukfsbp3fjmcgb848u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRvYF-0BK2Zg4vTfGkhl4394dOgT3mCxk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29867047695-jfonniicurj0nt7ukfsbp3fjmcgb848u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
