@@ -33,7 +33,7 @@ public class SplashActivity extends Activity {
         mRunnable = new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                startActivity(new Intent(SplashActivity.this, SignIn.class));
                 finish();
             }
         };
