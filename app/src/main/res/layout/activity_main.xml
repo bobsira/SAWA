@@ -6,5 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.mtusawa.MainActivity">
 
+    <TextView
+        android:textSize="75sp"
+        android:gravity="center"
+        android:id="@+id/text_sawa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textAppearance="?android:textAppearanceLarge"
+        tools:ignore="InvalidId" />
 
 </RelativeLayout>
