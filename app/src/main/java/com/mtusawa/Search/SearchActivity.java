@@ -1,8 +1,8 @@
-package com.mtusawa.Home;
-
+package com.mtusawa.Search;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,17 +11,21 @@ import com.mtusawa.R;
 import com.mtusawa.Utils.BottomNavigationViewEx;
 import com.mtusawa.Utils.BottomNavigationViewHelper;
 
-public class HomeActivity extends AppCompatActivity {
+/**
+ * Created by bobsira on 12/15/17.
+ */
 
-    private static final String TAG = "HomeActivity";
-    private static final int ACTIVITY_NUM = 0;
-    private Context mContext = HomeActivity.this;
+public class SearchActivity extends AppCompatActivity{
+
+    private static final String TAG = "SearchActivity";
+    private static final int ACTIVITY_NUM = 1;
+    private Context mContext = SearchActivity.this;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Log.d(TAG, "onCreate: starting.");
+        Log.d(TAG, "onCreate: started.");
         setupBottomNavigationView();
     }
 
