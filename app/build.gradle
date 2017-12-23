@@ -36,6 +36,9 @@ dependencies {
 
     //Circle ImageView
     compile 'de.hdodenhof:circleimageview:2.2.0'
+
+    //Universal image loader
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 }
 
 
