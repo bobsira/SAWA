@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.mtusawa.R;
 import com.mtusawa.Utils.BottomNavigationViewEx;
 import com.mtusawa.Utils.BottomNavigationViewHelper;
+import com.mtusawa.Utils.SectionsPagerAdapter;
 
 public class HomeActivity extends AppCompatActivity {
 

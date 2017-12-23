@@ -1,4 +1,4 @@
-package com.mtusawa.Home;
+package com.mtusawa.Utils;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
