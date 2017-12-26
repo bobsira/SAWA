@@ -16,9 +16,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * Created by miles on 23/12/2017.
  */
 public class EditProfileFragment extends Fragment {
-
     private static final String TAG = "EditProfileFragment";
-
     private ImageView mProfilePhoto;
 
     @Nullable
@@ -26,18 +24,24 @@ public class EditProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_editprofile, container, false);
         mProfilePhoto = (ImageView) view.findViewById(R.id.profile_photo);
-
-        initImageLoader();
-
+        //initImageLoader();
         setProfileImage();
-
+        //back arrow for navigating back to "ProfileActivity"
+        ImageView backArrow = (ImageView) view.findViewById(R.id.backArrow);
+        backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: navigating back to ProfileActivity");
+                getActivity().finish();
+            }
+        });
         return view;
     }
 
-    private void initImageLoader(){
-        UniversalImageLoader universalImageLoader = new UniversalImageLoader(getActivity());
-        ImageLoader.getInstance().init(universalImageLoader.getConfig());
-    }
+//    private void initImageLoader(){
+//        UniversalImageLoader universalImageLoader = new UniversalImageLoader(getActivity());
+//        ImageLoader.getInstance().init(universalImageLoader.getConfig());
+//    }
 
     private void setProfileImage(){
         Log.d(TAG, "setProfileImage: setting profile image.");

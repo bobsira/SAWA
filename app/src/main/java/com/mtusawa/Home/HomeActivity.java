@@ -13,6 +13,8 @@ import com.mtusawa.R;
 import com.mtusawa.Utils.BottomNavigationViewEx;
 import com.mtusawa.Utils.BottomNavigationViewHelper;
 import com.mtusawa.Utils.SectionsPagerAdapter;
+import com.mtusawa.Utils.UniversalImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -25,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Log.d(TAG, "onCreate: starting.");
+        initImageLoader();
         setupBottomNavigationView();
         setupViewPager();
     }
@@ -61,6 +64,11 @@ public class HomeActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_camera);
         tabLayout.getTabAt(1).setIcon(R.drawable.sawa_logo);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_arrow);
+    }
+
+    private void initImageLoader(){
+        UniversalImageLoader universalImageLoader = new UniversalImageLoader(mContext);
+        ImageLoader.getInstance().init(universalImageLoader.getConfig());
     }
 
 }
