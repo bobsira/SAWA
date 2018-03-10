@@ -153,12 +153,12 @@ public class FirebaseMethods {
     }
 
     /**
-     * Retrieves the account settings for teh user currently logged in
+     * Retrieves the account settings for the user currently logged in
      * Database: user_acount_Settings node
      * @param dataSnapshot
      * @return
      */
-    private UserSettings getUserAccountSettings(DataSnapshot dataSnapshot){
+    public UserSettings getUserSettings(DataSnapshot dataSnapshot){
         Log.d(TAG, "getUserAccountSettings: retrieving user account settings from firebase.");
 
 
