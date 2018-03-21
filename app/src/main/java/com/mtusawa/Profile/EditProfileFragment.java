@@ -25,6 +25,7 @@ import org.w3c.dom.Text;
 import com.mtusawa.R;
 import com.mtusawa.Utils.FirebaseMethods;
 import com.mtusawa.Utils.UniversalImageLoader;
+import com.mtusawa.models.User;
 import com.mtusawa.models.UserAccountSettings;
 import com.mtusawa.models.UserSettings;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -48,6 +49,7 @@ public class EditProfileFragment extends Fragment {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
     private FirebaseMethods mFirebaseMethods;
+    private String userID;
 
     @Nullable
     @Override
@@ -92,6 +94,53 @@ public class EditProfileFragment extends Fragment {
 //        UniversalImageLoader.setImage(imgURL, mProfilePhoto, null, "https://");
 //    }
 
+    /**
+     * Retrieves the data contained in the widgets and submits it to the database
+     * Before donig so it chekcs to make sure the username chosen is unqiue
+     */
+    private void saveProfileSettings(){
+        final String displayName = mDisplayName.getText().toString();
+        final String username = mUsername.getText().toString();
+        final String website = mWebsite.getText().toString();
+        final String description = mDescription.getText().toString();
+        final String email = mEmail.getText().toString();
+        final long phoneNumber = Long.parseLong(mPhoneNumber.getText().toString());
+
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                User user = new User();
+                for(DataSnapshot ds:  dataSnapshot.child(getString(R.string.dbname_users)).getChildren()){
+                    if(ds.getKey().equals(userID)){
+                        user.setUsername(ds.getValue(User.class).getUsername());
+                    }
+                }
+                Log.d(TAG, "onDataChange: CURRENT USERNAME: " + user.getUsername());
+
+                //case1: the user did not change their username
+                if(user.getUsername().equals(username)){
+
+                }
+                //case2: the user changed their username therefore we need to check for uniqueness
+                else{
+
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
     private void setProfileWidgets(UserSettings userSettings){
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getUser().getEmail());
@@ -124,6 +173,7 @@ public class EditProfileFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
+        userID = mAuth.getCurrentUser().getUid();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
