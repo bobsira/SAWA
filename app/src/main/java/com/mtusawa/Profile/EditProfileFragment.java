@@ -1,4 +1,5 @@
 package com.mtusawa.Profile;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -38,7 +39,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by miles on 23/12/2017.
  */
-public class EditProfileFragment extends Fragment {
+public class EditProfileFragment extends Fragment implements
+        ConfirmPasswordDialog.OnConfirmPasswordListener {
+
+
     private static final String TAG = "EditProfileFragment";
     //private ImageView mProfilePhoto;
     //EditProfile Fragment widgets
@@ -47,7 +51,6 @@ public class EditProfileFragment extends Fragment {
     private CircleImageView mProfilePhoto;
     //vars
     private UserSettings mUserSettings;
-
     //firebase
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -55,6 +58,11 @@ public class EditProfileFragment extends Fragment {
     private DatabaseReference myRef;
     private FirebaseMethods mFirebaseMethods;
     private String userID;
+
+    @Override
+    public void onConfirmPassword(String password) {
+        Log.d(TAG, "onConfirmPassword: got the password: " + password);
+    }
 
     @Nullable
     @Override
@@ -114,7 +122,7 @@ public class EditProfileFragment extends Fragment {
      * Retrieves the data contained in the widgets and submits it to the database
      * Before donig so it chekcs to make sure the username chosen is unqiue
      */
-    private void saveProfileSettings(){
+    private void saveProfileSettings() {
         final String displayName = mDisplayName.getText().toString();
         final String username = mUsername.getText().toString();
         final String website = mWebsite.getText().toString();
@@ -124,17 +132,18 @@ public class EditProfileFragment extends Fragment {
 
 
         //case1: if the user made a change to their username
-        if(!mUserSettings.getUser().getUsername().equals(username)){
+        if (!mUserSettings.getUser().getUsername().equals(username)) {
 
             checkIfUsernameExists(username);
         }
         //case2: if the user made a change to their email
-        if(!mUserSettings.getUser().getEmail().equals(email)){
+        if (!mUserSettings.getUser().getEmail().equals(email)) {
 
             // step1) Reauthenticate
             //          -Confirm the password and email
             ConfirmPasswordDialog dialog = new ConfirmPasswordDialog();
             dialog.show(getFragmentManager(), getString(R.string.confirm_password_dialog));
+            dialog.setTargetFragment(EditProfileFragment.this, 1);
 
 
             // step2) check if the email already is registered
@@ -147,6 +156,7 @@ public class EditProfileFragment extends Fragment {
 
     /**
      * Check is @param username already exists in teh database
+     *
      * @param username
      */
     private void checkIfUsernameExists(final String username) {
@@ -161,14 +171,14 @@ public class EditProfileFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(!dataSnapshot.exists()){
+                if (!dataSnapshot.exists()) {
                     //add the username
                     mFirebaseMethods.updateUsername(username);
                     Toast.makeText(getActivity(), "saved username.", Toast.LENGTH_SHORT).show();
 
                 }
-                for(DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
-                    if (singleSnapshot.exists()){
+                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                    if (singleSnapshot.exists()) {
                         Log.d(TAG, "checkIfUsernameExists: FOUND A MATCH: " + singleSnapshot.getValue(User.class).getUsername());
                         Toast.makeText(getActivity(), "That username already exists.", Toast.LENGTH_SHORT).show();
                     }
@@ -182,7 +192,7 @@ public class EditProfileFragment extends Fragment {
         });
     }
 
-    private void setProfileWidgets(UserSettings userSettings){
+    private void setProfileWidgets(UserSettings userSettings) {
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getUser().getEmail());
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.getUser().getPhone_number());
@@ -209,7 +219,7 @@ public class EditProfileFragment extends Fragment {
     /**
      * Setup the firebase auth object
      */
-    private void setupFirebaseAuth(){
+    private void setupFirebaseAuth() {
         Log.d(TAG, "setupFirebaseAuth: setting up firebase auth.");
 
         mAuth = FirebaseAuth.getInstance();
@@ -267,4 +277,6 @@ public class EditProfileFragment extends Fragment {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
+
+
 }
