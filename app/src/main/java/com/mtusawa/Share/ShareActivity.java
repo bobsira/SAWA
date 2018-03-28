@@ -39,22 +39,22 @@ public class ShareActivity extends AppCompatActivity {
         }else{
             verifyPermissions(Permissions.PERMISSIONS);
         }
-        setupBottomNavigationView();
+        //setupBottomNavigationView();
     }
 
     private void setupViewPager(){
         SectionsPagerAdapter adapter =  new SectionsPagerAdapter(getSupportFragmentManager());
-//        adapter.addFragment(new GalleryFragment());
-//        adapter.addFragment(new PhotoFragment());
-//
-//        mViewPager = (ViewPager) findViewById(R.id.container);
-//        mViewPager.setAdapter(adapter);
-//
-//        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsBottom);
-//        tabLayout.setupWithViewPager(mViewPager);
-//
-//        tabLayout.getTabAt(0).setText(getString(R.string.gallery));
-//        tabLayout.getTabAt(1).setText(getString(R.string.photo));
+        adapter.addFragment(new GalleryFragment());
+        adapter.addFragment(new PhotoFragment());
+
+        mViewPager = (ViewPager) findViewById(R.id.viewpager_container);
+        mViewPager.setAdapter(adapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabsBottom);
+        tabLayout.setupWithViewPager(mViewPager);
+
+        tabLayout.getTabAt(0).setText(getString(R.string.gallery));
+        tabLayout.getTabAt(1).setText(getString(R.string.photo));
 
     }
 
