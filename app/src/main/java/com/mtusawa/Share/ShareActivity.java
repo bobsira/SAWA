@@ -71,6 +71,11 @@ public class ShareActivity extends AppCompatActivity {
 
     }
 
+    public int getTask(){
+        Log.d(TAG, String.format("getTask: TASK: %d", getIntent().getFlags()));
+        return getIntent().getFlags();
+    }
+
     /**
      * verifiy all the permissions passed to the array
      * @param permissions
