@@ -1,9 +1,12 @@
 package com.mtusawa.Utils;
+
+import android.accounts.Account;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -24,6 +27,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import com.mtusawa.Home.HomeActivity;
+import com.mtusawa.Profile.AccountSettingsActivity;
 import com.mtusawa.R;
 import com.mtusawa.models.Photo;
 import com.mtusawa.models.User;
@@ -127,6 +131,11 @@ public class FirebaseMethods {
         //case new profile photo
         else if(photoType.equals(mContext.getString(R.string.profile_photo))){
             Log.d(TAG, "uploadNewPhoto: uploading new PROFILE photo");
+
+            ((AccountSettingsActivity)mContext).setViewPager(
+                    ((AccountSettingsActivity)mContext).pagerAdapter
+                            .getFragmentNumber(mContext.getString(R.string.edit_profile_fragment))
+            );
 
             String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
             StorageReference storageReference = mStorageReference
