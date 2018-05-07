@@ -5,9 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -42,7 +44,8 @@ import java.util.TimeZone;
  * Created by bobsira on 4/16/18.
  */
 
-public class ViewPostFragment extends Fragment{
+public class ViewPostFragment extends Fragment {
+
     private static final String TAG = "ViewPostFragment";
 
     public ViewPostFragment(){
@@ -71,6 +74,7 @@ public class ViewPostFragment extends Fragment{
     private String photoUsername = "";
     private String profilePhotoUrl = "";
     private UserAccountSettings mUserAccountSettings;
+    private GestureDetector mGestureDetector;
 
     @Nullable
     @Override
@@ -88,6 +92,7 @@ public class ViewPostFragment extends Fragment{
         mHeartWhite = (ImageView) view.findViewById(R.id.image_heart);
         mProfileImage = (ImageView) view.findViewById(R.id.profile_photo);
 
+        mGestureDetector = new GestureDetector(getActivity(), new GestureListener());
         try{
             mPhoto = getPhotoFromBundle();
             UniversalImageLoader.setImage(mPhoto.getImage_path(), mPostImage, null, "");
@@ -102,7 +107,36 @@ public class ViewPostFragment extends Fragment{
         getPhotoDetails();
         //setupWidgets();
 
+        testToggle();
+
         return view;
+    }
+
+    private void testToggle(){
+        mHeartRed.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return mGestureDetector.onTouchEvent(event);
+            }
+        });
+        mHeartWhite.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return mGestureDetector.onTouchEvent(event);
+            }
+        });
+    }
+
+    public class GestureListener extends GestureDetector.SimpleOnGestureListener{
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return super.onDown(e);
+        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            return super.onDoubleTap(e);
+        }
     }
 
     private void getPhotoDetails(){
@@ -138,7 +172,6 @@ public class ViewPostFragment extends Fragment{
         UniversalImageLoader.setImage(mUserAccountSettings.getProfile_photo(), mProfileImage, null, "");
         mUsername.setText(mUserAccountSettings.getUsername());
     }
-
 
     /**
      * Returns a string representing the number of days ago the post was made
@@ -207,7 +240,7 @@ public class ViewPostFragment extends Fragment{
         menuItem.setChecked(true);
     }
 
-           /*
+       /*
     ------------------------------------ Firebase ---------------------------------------------
      */
 
