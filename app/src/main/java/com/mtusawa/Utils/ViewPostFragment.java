@@ -1,4 +1,4 @@
-package com.mtusawa.Profile;
+package com.mtusawa.Utils;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -157,7 +157,7 @@ public class ViewPostFragment extends Fragment {
 
                             String[] splitUsers = mUsers.toString().split(",");
 
-                            if(mUsers.toString().contains(mUserAccountSettings.getUsername())){
+                            if(mUsers.toString().contains(mUserAccountSettings.getUsername()+ ",")){//mitch, mitchell.tabian
                                 mLikedByCurrentUser = true;
                             }else{
                                 mLikedByCurrentUser = false;
