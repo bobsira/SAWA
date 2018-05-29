@@ -1,32 +1,17 @@
 package com.mtusawa.Profile;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.mtusawa.R;
-import com.mtusawa.Utils.BottomNavigationViewEx;
-import com.mtusawa.Utils.BottomNavigationViewHelper;
-import com.mtusawa.Utils.GridImageAdapter;
-import com.mtusawa.Utils.UniversalImageLoader;
+import com.mtusawa.Utils.ViewPostFragment;
 import com.mtusawa.models.Photo;
-
-import java.util.ArrayList;
-import android.widget.TextView;
-
-import static com.mtusawa.R.id.profileMenu;
 
 /**
  * Created by bobsira on 12/15/17.
