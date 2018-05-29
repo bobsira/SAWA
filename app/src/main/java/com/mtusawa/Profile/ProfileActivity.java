@@ -17,7 +17,16 @@ import com.mtusawa.models.Photo;
  * Created by bobsira on 12/15/17.
  */
 
-public class ProfileActivity extends AppCompatActivity implements ProfileFragment.OnGridImageSelectedListener {
+public class ProfileActivity extends AppCompatActivity implements
+        ProfileFragment.OnGridImageSelectedListener,
+        ViewPostFragment.OnCommentThreadSelectedListener{
+
+    private static final String TAG = "ProfileActivity";
+
+    @Override
+    public void onCommentThreadSelectedListener(Photo photo) {
+
+    }
 
     @Override
     public void onGridImageSelected(Photo photo, int activityNumber) {
@@ -27,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileFragmen
         Bundle args = new Bundle();
         args.putParcelable(getString(R.string.photo), photo);
         args.putInt(getString(R.string.activity_number), activityNumber);
+
         fragment.setArguments(args);
 
         FragmentTransaction transaction  = getSupportFragmentManager().beginTransaction();
@@ -36,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileFragmen
 
     }
 
-    private static final String TAG = "ProfileActivity";
+
     private static final int ACTIVITY_NUM = 4;
     private static final int NUM_GRID_COLUMNS = 3;
 
@@ -53,6 +63,8 @@ public class ProfileActivity extends AppCompatActivity implements ProfileFragmen
         Log.d(TAG, "onCreate: started.");
 
         init();
+
+
     }
 
     private void init(){
@@ -64,5 +76,7 @@ public class ProfileActivity extends AppCompatActivity implements ProfileFragmen
         transaction.addToBackStack(getString(R.string.profile_fragment));
         transaction.commit();
     }
+
+
 
 }
